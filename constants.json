@@ -1,4 +1,12 @@
 {
-    "nn_epochs": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-    "n_layers": []
+  "epochs": [30, 50],
+  "learning_rate": [1e-3, 1e-4],
+  "batch_size": [32, 64],
+  "optimizer": ["AdamW", "Adam", "SGD"],
+  "architecture": [
+    [64, 32],
+    [128, 64, 32],
+    [256, 128, 64]
+  ],
+  "dropout": [0.2, 0.3]
 }

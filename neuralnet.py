@@ -2,18 +2,19 @@ import torch.nn as nn
 
 
 class CreditNN(nn.Module):
-    def __init__(self, input_dim):
+    """
+    Custom NN class for gridsearch. Pass in number of hidden layers, different dropout values, this creates a NN automatically.
+    """
+    def __init__(self, input_dim, hidden_layers, dropout):
         super().__init__()
-        self.net = nn.Sequential(
-            nn.Linear(input_dim, 128),
-            nn.ReLU(),
-            nn.Dropout(0.6),
-            nn.Linear(128, 64),
-            nn.ReLU(),
-            nn.Dropout(0.8),
-            nn.Linear(64, 1),
-            nn.Sigmoid()
-        )
+        layers = []
+        prev = input_dim
+        for h in hidden_layers:
+            layers += [nn.Linear(prev, h), nn.ReLU(), nn.Dropout(dropout)]
+            prev = h
+        layers.append(nn.Linear(prev, 1))
+        layers.append(nn.Sigmoid())
+        self.net = nn.Sequential(*layers)
 
     def forward(self, x):
         return self.net(x)
