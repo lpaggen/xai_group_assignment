@@ -5,6 +5,7 @@ class CreditNN(nn.Module):
     """
     Custom NN class for gridsearch. Pass in number of hidden layers, different dropout values, this creates a NN automatically.
     """
+
     def __init__(self, input_dim, hidden_layers, dropout):
         super().__init__()
         layers = []
